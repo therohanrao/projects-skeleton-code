@@ -31,12 +31,24 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
     optimizer = optim.Adam(model.parameters())
     loss_fn = nn.CrossEntropyLoss()
 
+    # Use GPU
+    if torch.cuda.is_available(): # Check if GPU is available
+        device = torch.device('cuda')
+    else:
+        device = torch.device('cpu')
+
+    model = model.to(device)
+
     step = 0
     for epoch in range(epochs):
         print(f"Epoch {epoch + 1} of {epochs}")
 
         # Loop over each batch in the dataset
         for batch in tqdm(train_loader):
+            images, labels = batch
+
+            images = images.to(device)
+            labels = labels.to(device)
             # TODO: Backpropagation and gradient descent
 
             # Periodically evaluate our model + log to Tensorboard
@@ -45,15 +57,23 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
                 # Compute training loss and accuracy.
                 # Log the results to Tensorboard.
 
+                # Forward propagation
+                outputs = model(images) # Same thing as model.forward(images)
+
                 # TODO:
                 # Compute validation loss and accuracy.
                 # Log the results to Tensorboard.
                 # Don't forget to turn off gradient calculations!
+                # Backprop
+                loss = loss_fn(outputs, labels)
+                loss.backward()       # Compute gradients
+                optimizer.step()      # Update all the weights with the gradients you just calculated
+                optimizer.zero_grad() # Clear gradients before next iteration
                 evaluate(val_loader, model, loss_fn)
 
             step += 1
 
-        print()
+        print('Epoch:', epoch, 'Loss:', loss.item())
 
 
 def compute_accuracy(outputs, labels):

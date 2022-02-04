@@ -1,6 +1,7 @@
 import os
 
 import constants
+import torch
 from data.StartingDataset import StartingDataset
 from networks.StartingNetwork import StartingNetwork
 from train_functions.starting_train import starting_train
@@ -10,7 +11,7 @@ def main():
     # Get command line arguments
     hyperparameters = {"epochs": constants.EPOCHS, "batch_size": constants.BATCH_SIZE}
 
-    # TODO: Add GPU support. This line of code might be helpful.
+    # Add GPU support. This line of code might be helpful.
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     print("Epochs:", constants.EPOCHS)
