@@ -8,10 +8,25 @@ class StartingDataset(torch.utils.data.Dataset):
     """
     Dataset that contains 100000 3x224x224 black images (all zeros).
     """
-    def __init__(self):
+    def __init__(self, iseval):
         # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#
         
-        self.images = pd.read_csv("cassava-leaf-disease-classification/train.csv")
+
+        preDF = pd.read_csv("cassava-leaf-disease-classification/train.csv")
+
+        if iseval:
+            '''
+            self.images = preDF.truncate()
+            '''
+            pass
+        else:
+            '''
+            self.images = preDF
+            '''
+            pass
+
+        self.images = preDF
+
 
         # print(self.images.info())
         # print(len(self.images))
@@ -20,10 +35,9 @@ class StartingDataset(torch.utils.data.Dataset):
         label = self.images.loc[index, 'label']
 
         im = Image.open("cassava-leaf-disease-classification/train_images/" + self.images.loc[index ,'image_id'])
+        im = im.resize((224, 224))
         trans1 = transforms.ToTensor()
         image_tensor = trans1(im)
-        # TODO: resize to match rest of program
-        # image_tensor = trans1(im).reshape([3, 224, 224])
 
         return image_tensor, label
 

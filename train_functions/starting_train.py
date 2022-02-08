@@ -38,37 +38,39 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
         device = torch.device('cpu')
 
     model = model.to(device)
+    model.train()
 
-    step = 0
+    step = 1
     for epoch in range(epochs):
         print(f"Epoch {epoch + 1} of {epochs}")
 
         # Loop over each batch in the dataset
+        # for batch in train_loader:
         for batch in tqdm(train_loader):
             images, labels = batch
 
             images = images.to(device)
             labels = labels.to(device)
-            # TODO: Backpropagation and gradient descent
+
+            # Forward propagation
+            outputs = model.forward(images) # Same thing as model.forward(images) = model(images)
+
+            # Backpropagation and gradient descent
+            # Compute validation loss and accuracy.
+            # Log the results to Tensorboard.
+            # Don't forget to turn off gradient calculations!
+            # Backprop
+            loss = loss_fn(outputs, labels)
+            loss.backward()       # Compute gradients
+            optimizer.step()      # Update all the weights with the gradients you just calculated
+            optimizer.zero_grad() # Clear gradients before next iteration
 
             # Periodically evaluate our model + log to Tensorboard
             if step % n_eval == 0:
                 # TODO:
                 # Compute training loss and accuracy.
                 # Log the results to Tensorboard.
-
-                # Forward propagation
-                outputs = model(images) # Same thing as model.forward(images)
-
-                # TODO:
-                # Compute validation loss and accuracy.
-                # Log the results to Tensorboard.
-                # Don't forget to turn off gradient calculations!
-                # Backprop
-                loss = loss_fn(outputs, labels)
-                loss.backward()       # Compute gradients
-                optimizer.step()      # Update all the weights with the gradients you just calculated
-                optimizer.zero_grad() # Clear gradients before next iteration
+                print ("\nevaluating...\n")
                 evaluate(val_loader, model, loss_fn)
 
             step += 1
@@ -94,9 +96,35 @@ def compute_accuracy(outputs, labels):
 
 
 def evaluate(val_loader, model, loss_fn):
-    """
-    Computes the loss and accuracy of a model on the validation dataset.
+    if torch.cuda.is_available(): # Check if GPU is available
+        device = torch.device('cuda')
+    else:
+        device = torch.device('cpu')
+    model = model.to(device)
+    model.eval()
 
-    TODO!
-    """
-    pass
+    # Computes the loss and accuracy of a model on the validation dataset.
+    correct = 0
+    total = 0
+    with torch.no_grad(): # IMPORTANT: turn off gradient computations
+      # for batch in val_loader:
+      batch = next(iter(val_loader))
+      images, labels = batch
+      images = images.to(device)
+      labels = labels.to(device)
+
+      #images = torch.reshape(images, (-1, 1, 224, 224))
+      outputs = model(images)
+      predictions = torch.argmax(outputs, dim=1)
+
+      # labels == predictions does an elementwise comparison
+      # e.g.                labels = [1, 2, 3, 4]
+      #                predictions = [1, 4, 3, 3]
+      #      labels == predictions = [1, 0, 1, 0]  (where 1 is true, 0 is false)
+      # So the number of correct predictions is the sum of (labels == predictions)
+      correct += (labels == predictions).int().sum()
+      total += len(predictions)
+
+    print('Accuracy:', (correct / total).item())
+
+    model.train()
