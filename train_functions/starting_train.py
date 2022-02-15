@@ -108,7 +108,7 @@ def evaluate(val_loader, model, loss_fn):
     total = 0
     with torch.no_grad(): # IMPORTANT: turn off gradient computations
       # for batch in val_loader:
-      batch = next(iter(val_loader))
+      batch = next(iter(val_loader))      
       images, labels = batch
       images = images.to(device)
       labels = labels.to(device)
