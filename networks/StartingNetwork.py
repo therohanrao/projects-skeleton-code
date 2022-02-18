@@ -15,7 +15,9 @@ class StartingNetwork(torch.nn.Module):
 
         self.flatten = nn.Flatten()
         self.fc1 = nn.Linear(8 * 56 * 56, 256)
+        self.bn1 = nn.BatchNorm1d(256)
         self.fc2 = nn.Linear(256, 128)
+        self.bn2 = nn.BatchNorm1d(128)
         self.fc3 = nn.Linear(128, 5)
 
         # self.sigmoid = nn.Sigmoid()
@@ -42,10 +44,12 @@ class StartingNetwork(torch.nn.Module):
         # (n, 8 * 56 * 56)
 
         x = self.fc1(x)
+        x = self.bn1(x)
         x = F.relu(x)
         # (n, 256)
 
         x = self.fc2(x)
+        x = self.bn2(x)
         x = F.relu(x)
         # (n, 128)
 

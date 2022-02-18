@@ -15,10 +15,10 @@ class StartingDataset(torch.utils.data.Dataset):
         preDF = pd.read_csv("cassava-leaf-disease-classification/train.csv")
         
         if iseval:
-            self.images = preDF.truncate(before = len(preDF)/5).reset_index(drop = True)
+            self.images = preDF.truncate(after = len(preDF)/5).reset_index(drop = True)
             print(self.images.info())
         else:
-            self.images = preDF.truncate(after = len(preDF)/5).reset_index(drop = True)
+            self.images = preDF.truncate(before = len(preDF)/5).reset_index(drop = True)
             print(self.images.info())
 
     

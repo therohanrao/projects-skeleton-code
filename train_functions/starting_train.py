@@ -29,6 +29,7 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
 
     # Initalize optimizer (for gradient descent) and loss function
     optimizer = optim.Adam(model.parameters())
+    #optim.Adam([var1, var2], lr=0.0001)
     loss_fn = nn.CrossEntropyLoss()
 
     # Use GPU
@@ -72,10 +73,10 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
                 # Log the results to Tensorboard.
                 print ("\nevaluating...\n")
                 evaluate(val_loader, model, loss_fn)
-
+            print('Epoch:', epoch + 1, 'Loss:', loss.item())
             step += 1
 
-        print('Epoch:', epoch, 'Loss:', loss.item())
+        
 
 
 def compute_accuracy(outputs, labels):
@@ -107,23 +108,24 @@ def evaluate(val_loader, model, loss_fn):
     correct = 0
     total = 0
     with torch.no_grad(): # IMPORTANT: turn off gradient computations
-      # for batch in val_loader:
-      batch = next(iter(val_loader))      
-      images, labels = batch
-      images = images.to(device)
-      labels = labels.to(device)
-
-      #images = torch.reshape(images, (-1, 1, 224, 224))
-      outputs = model(images)
-      predictions = torch.argmax(outputs, dim=1)
-
-      # labels == predictions does an elementwise comparison
-      # e.g.                labels = [1, 2, 3, 4]
-      #                predictions = [1, 4, 3, 3]
-      #      labels == predictions = [1, 0, 1, 0]  (where 1 is true, 0 is false)
-      # So the number of correct predictions is the sum of (labels == predictions)
-      correct += (labels == predictions).int().sum()
-      total += len(predictions)
+        for batch in tqdm(val_loader):
+            # for batch in val_loader:
+                batch = next(iter(val_loader))      
+                images, labels = batch
+                images = images.to(device)
+                labels = labels.to(device)
+      
+                #images = torch.reshape(images, (-1, 1, 224, 224))
+                outputs = model(images)
+                predictions = torch.argmax(outputs, dim=1)
+      
+                # labels == predictions does an elementwise comparison
+                # e.g.                labels = [1, 2, 3, 4]
+                #                predictions = [1, 4, 3, 3]
+                #      labels == predictions = [1, 0, 1, 0]  (where 1 is true, 0 is false)
+                # So the number of correct predictions is the sum of (labels == predictions)
+                correct += (labels == predictions).int().sum()
+                total += len(predictions)
 
     print('Accuracy:', (correct / total).item())
 
