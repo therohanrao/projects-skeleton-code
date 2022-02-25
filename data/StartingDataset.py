@@ -30,6 +30,16 @@ class StartingDataset(torch.utils.data.Dataset):
         trans1 = transforms.ToTensor()
         image_tensor = trans1(im)
 
+        normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        normalize(image_tensor)
+
+        if not is_eval:
+            #data augmentation goes here
+            #only do on test data
+            #maybe randomly select type of augmentation?
+            #maybe only augment unhealthy?
+            pass
+
         return image_tensor, label
 
     def __len__(self):

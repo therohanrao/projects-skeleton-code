@@ -4,6 +4,7 @@ import constants
 import torch
 from data.StartingDataset import StartingDataset
 from networks.StartingNetwork import StartingNetwork
+from networks.StartingNetwork import StartingNetwork2
 from train_functions.starting_train import starting_train
 
 
@@ -20,7 +21,7 @@ def main():
     # Initalize dataset and model. Then train the model!
     train_dataset = StartingDataset(0)
     val_dataset = StartingDataset(1)
-    model = StartingNetwork()
+    model = StartingNetwork2()
     starting_train(
         train_dataset=train_dataset,
         val_dataset=val_dataset,
@@ -28,7 +29,6 @@ def main():
         hyperparameters=hyperparameters,
         n_eval=constants.N_EVAL,
     )
-
 
 if __name__ == "__main__":
     main()

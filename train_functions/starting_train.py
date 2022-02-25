@@ -28,7 +28,7 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
     )
 
     # Initalize optimizer (for gradient descent) and loss function
-    optimizer = optim.Adam(model.parameters())
+    optimizer = optim.Adam(model.parameters(), 0.001)
     #optim.Adam([var1, var2], lr=0.0001)
     loss_fn = nn.CrossEntropyLoss()
 
@@ -47,7 +47,8 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
 
         # Loop over each batch in the dataset
         # for batch in train_loader:
-        for batch in tqdm(train_loader):
+        loop = tqdm(train_loader)
+        for batch in loop:
             images, labels = batch
 
             images = images.to(device)
@@ -73,7 +74,8 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
                 # Log the results to Tensorboard.
                 print ("\nevaluating...\n")
                 evaluate(val_loader, model, loss_fn)
-            print('Epoch:', epoch + 1, 'Loss:', loss.item())
+            #print('Epoch:', epoch + 1, 'Loss:', loss.item())
+            loop.set_postfix({"loss": f"{loss.item() : .03f}"})
             step += 1
 
         
