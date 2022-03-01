@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.optim.lr_scheduler import MultiStepLR
 from tqdm import tqdm
 
 
@@ -42,6 +43,9 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
     model.train()
 
     step = 1
+
+    lr_scheduler = MultiStepLR(optimizer, milestones=[20, 40], gamma=0.1)
+
     for epoch in range(epochs):
         print(f"Epoch {epoch + 1} of {epochs}")
 
@@ -77,6 +81,8 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
             #print('Epoch:', epoch + 1, 'Loss:', loss.item())
             loop.set_postfix({"loss": f"{loss.item() : .03f}"})
             step += 1
+
+        lr_scheduler.step()
 
         
 
