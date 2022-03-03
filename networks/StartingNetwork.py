@@ -63,16 +63,16 @@ class StartingNetwork2(torch.nn.Module):
     def __init__(self):
         super().__init__()
     
-        self.model_a = torch.hub.load('pytorch/vision:v0.10.0', 'resnet18', pretrained=True)
-        #self.fc = torch.nn.Sequential(*(list(self.model_a.children())[:-1]))
-
+        self.model_a = torch.hub.load('pytorch/vision:v0.10.0', 'resnet18', pretrained = True)
+        self.fc = torch.nn.Sequential(*(list(self.model_a.children())[:-1]))
+        self.model_a = self.fc
         #print(self.model_a)
 
         test = torch.rand(32,3,224,224)
 
         print(self.model_a(test).size())
 
-        self.fc1 = nn.Linear(1000, 256)
+        self.fc1 = nn.Linear(512, 256)
         self.bn1 = nn.BatchNorm1d(256)
         self.fc2 = nn.Linear(256, 128)
         self.bn2 = nn.BatchNorm1d(128)
@@ -80,9 +80,9 @@ class StartingNetwork2(torch.nn.Module):
   
 
     def forward(self, x):
-        with torch.no_grad():
-            features = self.model_a(x)
-
+        #with torch.no_grad():
+        features = self.model_a(x)
+        features = features.reshape(-1, 512)
         x = self.fc1(features)
         x = self.bn1(x)
         x = F.relu(x)

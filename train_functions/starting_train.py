@@ -22,10 +22,10 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
 
     # Initialize dataloaders
     train_loader = torch.utils.data.DataLoader(
-        train_dataset, batch_size=batch_size, shuffle=True
+        train_dataset, batch_size=batch_size, shuffle=True, pin_memory = True, num_workers = 8
     )
     val_loader = torch.utils.data.DataLoader(
-        val_dataset, batch_size=batch_size, shuffle=True
+        val_dataset, batch_size=batch_size, shuffle=True, pin_memory = True, num_workers = 8
     )
 
     # Initalize optimizer (for gradient descent) and loss function
@@ -118,7 +118,7 @@ def evaluate(val_loader, model, loss_fn):
     with torch.no_grad(): # IMPORTANT: turn off gradient computations
         for batch in tqdm(val_loader):
             # for batch in val_loader:
-                batch = next(iter(val_loader))      
+                #batch = next(iter(val_loader))      
                 images, labels = batch
                 images = images.to(device)
                 labels = labels.to(device)

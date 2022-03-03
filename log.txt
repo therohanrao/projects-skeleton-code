@@ -1,0 +1,323 @@
+Epochs: 60
+Batch size: 128
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 17117 entries, 0 to 17116
+Data columns (total 2 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   image_id  17117 non-null  object
+ 1   label     17117 non-null  int64 
+dtypes: int64(1), object(1)
+memory usage: 267.6+ KB
+None
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 4280 entries, 0 to 4279
+Data columns (total 2 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   image_id  4280 non-null   object
+ 1   label     4280 non-null   int64 
+dtypes: int64(1), object(1)
+memory usage: 67.0+ KB
+None
+torch.Size([32, 512, 1, 1])
+Epoch 1 of 60
+
+evaluating...
+
+Accuracy: 0.41028037667274475
+Epoch 2 of 60
+
+evaluating...
+
+Accuracy: 0.7768691778182983
+Epoch 3 of 60
+
+evaluating...
+
+Accuracy: 0.7707943916320801
+Epoch 4 of 60
+
+evaluating...
+
+Accuracy: 0.78387850522995
+Epoch 5 of 60
+
+evaluating...
+
+Accuracy: 0.7799065709114075
+Epoch 6 of 60
+
+evaluating...
+
+Accuracy: 0.8030374050140381
+Epoch 7 of 60
+
+evaluating...
+
+Accuracy: 0.7971962690353394
+Epoch 8 of 60
+
+evaluating...
+
+Accuracy: 0.7684579491615295
+Epoch 9 of 60
+
+evaluating...
+
+Accuracy: 0.8044393062591553
+Epoch 10 of 60
+
+evaluating...
+
+Accuracy: 0.7757009863853455
+Epoch 11 of 60
+
+evaluating...
+
+Accuracy: 0.7836448550224304
+Epoch 12 of 60
+
+evaluating...
+
+Accuracy: 0.7542056441307068
+Epoch 13 of 60
+
+evaluating...
+
+Accuracy: 0.7887850999832153
+Epoch 14 of 60
+
+evaluating...
+
+Accuracy: 0.7677570581436157
+Epoch 15 of 60
+
+evaluating...
+
+Accuracy: 0.8028037548065186
+Epoch 16 of 60
+
+evaluating...
+
+Accuracy: 0.7642523646354675
+Epoch 17 of 60
+
+evaluating...
+
+Accuracy: 0.7995327115058899
+Epoch 18 of 60
+
+evaluating...
+
+Accuracy: 0.796261727809906
+Epoch 19 of 60
+
+evaluating...
+
+Accuracy: 0.7771028280258179
+Epoch 20 of 60
+
+evaluating...
+
+Accuracy: 0.7946261763572693
+Epoch 21 of 60
+
+evaluating...
+
+Accuracy: 0.8184579610824585
+Epoch 22 of 60
+
+evaluating...
+
+Accuracy: 0.8200935125350952
+Epoch 23 of 60
+
+evaluating...
+
+Accuracy: 0.8238317966461182
+Epoch 24 of 60
+
+evaluating...
+
+Accuracy: 0.8219626545906067
+Epoch 25 of 60
+
+evaluating...
+
+Accuracy: 0.8217290043830872
+Epoch 26 of 60
+
+evaluating...
+
+Accuracy: 0.818224310874939
+Epoch 27 of 60
+
+evaluating...
+
+Accuracy: 0.8200935125350952
+Epoch 28 of 60
+
+evaluating...
+
+Accuracy: 0.820794403553009
+Epoch 29 of 60
+
+evaluating...
+
+Accuracy: 0.8210280537605286
+Epoch 30 of 60
+
+evaluating...
+
+Accuracy: 0.8224299550056458
+Epoch 31 of 60
+
+evaluating...
+
+Accuracy: 0.8224299550056458
+Epoch 32 of 60
+
+evaluating...
+
+Accuracy: 0.8184579610824585
+Epoch 33 of 60
+
+evaluating...
+
+Accuracy: 0.8175233602523804
+Epoch 34 of 60
+
+evaluating...
+
+Accuracy: 0.8200935125350952
+Epoch 35 of 60
+
+evaluating...
+
+Accuracy: 0.8264018893241882
+Epoch 36 of 60
+
+evaluating...
+
+Accuracy: 0.8219626545906067
+Epoch 37 of 60
+
+evaluating...
+
+Accuracy: 0.8184579610824585
+Epoch 38 of 60
+
+evaluating...
+
+Accuracy: 0.8214953541755676
+Epoch 39 of 60
+
+evaluating...
+
+Accuracy: 0.8189252614974976
+Epoch 40 of 60
+
+evaluating...
+
+Accuracy: 0.8238317966461182
+Epoch 41 of 60
+
+evaluating...
+
+Accuracy: 0.8238317966461182
+Epoch 42 of 60
+
+evaluating...
+
+Accuracy: 0.8231308460235596
+Epoch 43 of 60
+
+evaluating...
+
+Accuracy: 0.8261682391166687
+Epoch 44 of 60
+
+evaluating...
+
+Accuracy: 0.8264018893241882
+Epoch 45 of 60
+
+evaluating...
+
+Accuracy: 0.8233644962310791
+Epoch 46 of 60
+
+evaluating...
+
+Accuracy: 0.8205607533454895
+Epoch 47 of 60
+
+evaluating...
+
+Accuracy: 0.8247663974761963
+Epoch 48 of 60
+
+evaluating...
+
+Accuracy: 0.8231308460235596
+Epoch 49 of 60
+
+evaluating...
+
+Accuracy: 0.82032710313797
+Epoch 50 of 60
+
+evaluating...
+
+Accuracy: 0.820794403553009
+Epoch 51 of 60
+
+evaluating...
+
+Accuracy: 0.8196262121200562
+Epoch 52 of 60
+
+evaluating...
+
+Accuracy: 0.8214953541755676
+Epoch 53 of 60
+
+evaluating...
+
+Accuracy: 0.8224299550056458
+Epoch 54 of 60
+
+evaluating...
+
+Accuracy: 0.8212617039680481
+Epoch 55 of 60
+
+evaluating...
+
+Accuracy: 0.8245327472686768
+Epoch 56 of 60
+
+evaluating...
+
+Accuracy: 0.820794403553009
+Epoch 57 of 60
+
+evaluating...
+
+Accuracy: 0.8217290043830872
+Epoch 58 of 60
+
+evaluating...
+
+Accuracy: 0.8221963047981262
+Epoch 59 of 60
+
+evaluating...
+
+Accuracy: 0.8221963047981262
+Epoch 60 of 60
+
+evaluating...
+
+Accuracy: 0.8168224692344666
