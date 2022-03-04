@@ -86,7 +86,7 @@ class StartingNetwork2(torch.nn.Module):
         features = self.model_a(x)
         features = features.reshape(-1, 512)
         
-        x = self.head(x)
+        x = self.head(features)
 
         '''
         x = self.fc1(features)
