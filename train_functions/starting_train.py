@@ -29,8 +29,12 @@ def starting_train(train_dataset, val_dataset, model, hyperparameters, n_eval):
     )
 
     # Initalize optimizer (for gradient descent) and loss function
-    optimizer = optim.Adam(model.parameters(), 0.001)
+    #optimizer = optim.Adam(model.parameters(), 0.001)
     #optim.Adam([var1, var2], lr=0.0001)
+    optimizer = nn.SGD([
+    {'params': model.head.parameters()}, # use default learning rate of 0.1 for head
+    {'params': model.model_a.parameters(), 'lr': 1e-3} # use smaller learning rate of 0.001 for the encoder
+    ], lr=0.1, momentum=0.9)
     loss_fn = nn.CrossEntropyLoss()
 
     # Use GPU

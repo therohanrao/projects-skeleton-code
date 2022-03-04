@@ -77,12 +77,18 @@ class StartingNetwork2(torch.nn.Module):
         self.fc2 = nn.Linear(256, 128)
         self.bn2 = nn.BatchNorm1d(128)
         self.fc3 = nn.Linear(128, 5)
+
+        self.head = nn.Sequential(self.fc1, self.bn1, nn.ReLU(), self.fc, self.bn2, nn.ReLU(), self.fc3)
   
 
     def forward(self, x):
         #with torch.no_grad():
         features = self.model_a(x)
         features = features.reshape(-1, 512)
+        
+        x = self.head(x)
+
+        '''
         x = self.fc1(features)
         x = self.bn1(x)
         x = F.relu(x)
@@ -95,4 +101,6 @@ class StartingNetwork2(torch.nn.Module):
 
         x = self.fc3(x)
         # (n, 5)
+        '''
+
         return x
