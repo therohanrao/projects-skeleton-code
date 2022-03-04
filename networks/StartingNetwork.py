@@ -78,7 +78,7 @@ class StartingNetwork2(torch.nn.Module):
         self.bn2 = nn.BatchNorm1d(128)
         self.fc3 = nn.Linear(128, 5)
 
-        self.head = nn.Sequential(self.fc1, self.bn1, nn.ReLU(), self.fc, self.bn2, nn.ReLU(), self.fc3)
+        self.head = nn.Sequential(self.fc1, self.bn1, nn.ReLU(), self.fc2, self.bn2, nn.ReLU(), self.fc3)
   
 
     def forward(self, x):
